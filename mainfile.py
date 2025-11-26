@@ -1,5 +1,5 @@
 import pygame
-import UI
+import UI.rectangle
 pygame.init()
 
 screenUpdate = True
