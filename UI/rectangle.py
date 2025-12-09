@@ -3,9 +3,11 @@ pygame.init()
 
 color = "white"
 
-class rectangle:
-    def __init__(self, screen, leftTopX, leftTopY, height, width):
-        self.objectRect = pygame.draw.rect(screen, color, (leftTopX, leftTopY, width, height))
+class Rectangle:
+    def __init__(self, screen, leftTopX, leftTopY, width, height, color):
+        self.color = color
+        self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
+        
     
     def changeColor(self, letter):
         match letter:

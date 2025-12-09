@@ -1,19 +1,27 @@
-import rectangle
+import UI.rectangle
 
 
-class rectField:
-    def __init__(self, screen, sizeHorizontal, sizeVertical):
-        self.sizeHorizontal = sizeHorizontal
-        self.sizeVertical = sizeVertical
+class RectField:
+    def __init__(self, screen, numRectVertical, numRectHorizontal, rectWidth, rectHeight, xReset, yReset, color):
         self.screen = screen
+        self.numRectVertical = numRectVertical
+        self.numRectHorizontal = numRectHorizontal
+        self.rectWidth = rectWidth
+        self.rectHeight = rectHeight
+        self.yReset = yReset
+        self.xReset = xReset
+        self.color = color
+        RectField.listOfRects = []
 
-    def drawField(self, numRectVertical, numRectHorizontal, rectWidth, rectHeight, y, xReset, color):
-        x = xReset
-        listOfRect = []
-        for k in range(1, numRectVertical + 1):
-            for j in range(1, numRectHorizontal + 1):
-                rectangle(self.screen, color, (x, y, rectWidth - 1, rectHeight - 1))
-                listOfRect.append([x, y, rectWidth - 1, rectHeight - 1, color])
-                x += rectWidth
-            y += rectHeight
-            x = xReset
+    def drawField(self):
+        x = self.xReset
+        y = self.yReset
+        for row in range(1, self.numRectVertical + 1):
+            for column in range(1, self.numRectHorizontal + 1):
+                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, self.rectWidth - 1, self.rectHeight - 1, self.color))
+                x += self.rectWidth
+                # print(self.listOfRect)
+                # print([row, column])
+            y += self.rectHeight
+            x = self.xReset
+        y = self.yReset

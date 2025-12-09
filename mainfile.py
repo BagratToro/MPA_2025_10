@@ -1,5 +1,6 @@
 import pygame
-import UI.rectangle
+import UI.rectField
+import utils
 pygame.init()
 
 screenUpdate = True
@@ -14,15 +15,16 @@ screen = pygame.display.set_mode((screenWidth, screenHeight))
 WHITE = (255, 255, 255)
 mousePos = pygame.mouse.get_pos()
 
-grid = UI.Grid(screen = screen, rectHeight = squareScreenWidth / numRows, rectWidth = squareScreenHeight / numColumns, 
-                     numRows = numRows, numColumns = numColumns, startX = 0, startY = 0, color = WHITE, mousePos = mousePos)
+grid = UI.rectField.RectField(screen = screen, numRectHorizontal = numColumns, numRectVertical = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
+                              xReset = 0, yReset = 0, color = WHITE) #mousePos = mousePos
+
 
 running = True
 while running:
     mousePos = pygame.mouse.get_pos()
     # rect = UI.Rects(screen = screen, rectHeight = squareScreenWidth / numRectHeight, rectWidth = squareScreenHeight / numRectWidth, 
     #                 numRectWidth = numRectWidth, numRectHeight = numRectHeight, startX = 0, startY = 0, color = WHITE, mousePos = mousePos)
-    grid.mousePos = mousePos
+    # grid.mousePos = mousePos
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -31,7 +33,8 @@ while running:
     if screenUpdate:
         screenUpdate = False
     
-    grid.render()
+    grid.drawField()
+    # print(utils.connections())
     
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:
