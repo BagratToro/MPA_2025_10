@@ -15,7 +15,7 @@ screen = pygame.display.set_mode((screenWidth, screenHeight))
 WHITE = (255, 255, 255)
 mousePos = pygame.mouse.get_pos()
 
-grid = UI.rectField.RectField(screen = screen, numRectHorizontal = numColumns, numRectVertical = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
+grid = UI.rectField.RectField(screen = screen, numColumns = numColumns, numRows = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
                               xReset = 0, yReset = 0, color = WHITE) #mousePos = mousePos
 
 
@@ -34,7 +34,10 @@ while running:
         screenUpdate = False
     
     grid.drawField()
-    # print(utils.connections())
+
+    connections = utils.connections()
+    for connection in connections:
+        print(connection.row, connection.column)
     
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:

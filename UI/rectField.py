@@ -2,26 +2,28 @@ import UI.rectangle
 
 
 class RectField:
-    def __init__(self, screen, numRectVertical, numRectHorizontal, rectWidth, rectHeight, xReset, yReset, color):
-        self.screen = screen
-        self.numRectVertical = numRectVertical
-        self.numRectHorizontal = numRectHorizontal
-        self.rectWidth = rectWidth
-        self.rectHeight = rectHeight
-        self.yReset = yReset
-        self.xReset = xReset
-        self.color = color
+    def __init__(self, screen, numRows, numColumns, rectWidth, rectHeight, xReset, yReset, color):
+        RectField.numRows = numRows
+        RectField.numColumns = numColumns
+        RectField.rectWidth = rectWidth
+        RectField.rectHeight = rectHeight
+        RectField.yReset = yReset
+        RectField.xReset = xReset
         RectField.listOfRects = []
+        self.screen = screen
+        self.color = color
 
     def drawField(self):
-        x = self.xReset
-        y = self.yReset
-        for row in range(1, self.numRectVertical + 1):
-            for column in range(1, self.numRectHorizontal + 1):
-                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, self.rectWidth - 1, self.rectHeight - 1, self.color))
-                x += self.rectWidth
+        x = RectField.xReset
+        y = RectField.yReset
+        rectNum = 0
+        for row in range(1, RectField.numRows + 1):
+            for column in range(1, RectField.numColumns + 1):
+                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, rectNum, row - 1, column - 1, self.color))
+                rectNum += 1
+                x += RectField.rectWidth
                 # print(self.listOfRect)
-                # print([row, column])
-            y += self.rectHeight
-            x = self.xReset
-        y = self.yReset
+                #print([row, column])
+            y += RectField.rectHeight
+            x = RectField.xReset
+        y = RectField.yReset
