@@ -4,9 +4,8 @@ pygame.init()
 color = "white"
 
 class Rectangle:
-    def __init__(self, screen, leftTopX, leftTopY, width, height, rectNum, row, column, color):
+    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color):
         self.color = color
-        self.rectNum = rectNum
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))

@@ -16,11 +16,9 @@ class RectField:
     def drawField(self):
         x = RectField.xReset
         y = RectField.yReset
-        rectNum = 0
         for row in range(1, RectField.numRows + 1):
             for column in range(1, RectField.numColumns + 1):
-                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, rectNum, row - 1, column - 1, self.color))
-                rectNum += 1
+                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color))
                 x += RectField.rectWidth
                 # print(self.listOfRect)
                 #print([row, column])
