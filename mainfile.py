@@ -1,8 +1,8 @@
 import pygame
 import UI.rectField
+import UI.rectangle
 import utils
 pygame.init()
-
 screenUpdate = True
 squareScreenHeight = 700
 squareScreenWidth = 700
@@ -25,19 +25,27 @@ while running:
     # rect = UI.Rects(screen = screen, rectHeight = squareScreenWidth / numRectHeight, rectWidth = squareScreenHeight / numRectWidth, 
     #                 numRectWidth = numRectWidth, numRectHeight = numRectHeight, startX = 0, startY = 0, color = WHITE, mousePos = mousePos)
     # grid.mousePos = mousePos
-    
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        for rect in UI.rectField.RectField.listOfRects:
+            if rect.changeColor(event) != None:
+                grid.color = rect.changeColor(event)
+    #        UI.rectangle.rectangle.changeColor
+    #        rect.changeColor(event)
     
     if screenUpdate:
         screenUpdate = False
     
     grid.drawField()
+    
 
-    connections = utils.connections()
-    for connection in connections:
-        print(connection.row, connection.column)
+
+    # connections = utils.connections()
+    # for connection in connections:
+    #     print(connection.row, connection.column)
     
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:

@@ -3,22 +3,24 @@ pygame.init()
 
 color = "white"
 
+
 class Rectangle:
     def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color):
         self.color = color
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
-        
+
+    def changeColor(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_h:
+                self.color = (255, 0, 0)
+                print(self.color)
+            elif event.key == pygame.K_a:
+                print("Rechts")
+            elif event.key == pygame.K_ESCAPE:
+                print("ESC gedrückt")
     
-    def changeColor(self, letter):
-        match letter:
-            case "a":
-                self.color = "red"
-            case "h":
-                self.color = "black"
-            case _:
-                self.color = "white" # Would use (255, 255, 0) for yellow, that is the color for the starting block. I would in general use (a, b, c) for colors
 
         #if self.objectRect.collidepoint(mouse_pos):
         #     if event.type == pygame.KEYDOWN:
