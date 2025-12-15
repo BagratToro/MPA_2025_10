@@ -46,6 +46,11 @@ while running:
     # connections = utils.connections()
     # for connection in connections:
     #     print(connection.row, connection.column)
+    i = UI.rectField.RectField.listOfRects[115]
+    connections = utils.connections(i)
+    print(i.row, i.column)
+    for connection in connections:
+        print([connection.row, connection.column])
     
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:
