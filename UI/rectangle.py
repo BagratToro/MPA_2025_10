@@ -1,25 +1,30 @@
 import pygame
 pygame.init()
 
-color = "white"
 
 
+# Ist die Klasse für jedes einzelne Rechteck.
 class Rectangle:
     def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color):
+        self.screen = screen
+        self.rect = (leftTopX, leftTopY, width, height)
         self.color = color
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
 
+    # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
     def changeColor(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_h:
-                self.color = (255, 0, 0)
+                self.color = (255, 0, 0) #red
                 print(self.color)
             elif event.key == pygame.K_a:
                 print("Rechts")
             elif event.key == pygame.K_ESCAPE:
                 print("ESC gedrückt")
+
+        self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
     
 
         #if self.objectRect.collidepoint(mouse_pos):

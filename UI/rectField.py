@@ -1,6 +1,7 @@
 import UI.rectangle
 
 
+# Ist die Klasse für das Feld.
 class RectField:
     def __init__(self, screen, numRows, numColumns, rectWidth, rectHeight, xReset, yReset, color):
         RectField.numRows = numRows
@@ -12,7 +13,10 @@ class RectField:
         RectField.listOfRects = []
         self.screen = screen
         self.color = color
+        self.drawField()
 
+
+    # Zeichnet und fügt der Liste "listOfRects" alle Rechtecke als Objekte zu.
     def drawField(self):
         x = RectField.xReset
         y = RectField.yReset

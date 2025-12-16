@@ -2,6 +2,7 @@ import pygame
 import UI.rectField
 import UI.rectangle
 import utils
+import aStar.dijkstra
 pygame.init()
 screenUpdate = True
 squareScreenHeight = 700
@@ -36,21 +37,18 @@ while running:
     #        UI.rectangle.rectangle.changeColor
     #        rect.changeColor(event)
     
-    if screenUpdate:
-        screenUpdate = False
+    # if screenUpdate:
+    #     screenUpdate = False
     
-    grid.drawField()
+    #grid.drawField()
     
 
 
-    # connections = utils.connections()
+    i = UI.rectField.RectField.listOfRects[0]
+    # aStar.dijkstra.dijkstra(i)
+    # connections = utils.connections(i)
     # for connection in connections:
-    #     print(connection.row, connection.column)
-    i = UI.rectField.RectField.listOfRects[115]
-    connections = utils.connections(i)
-    print(i.row, i.column)
-    for connection in connections:
-        print([connection.row, connection.column])
+    #     print([connection.row, connection.column])
     
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:
