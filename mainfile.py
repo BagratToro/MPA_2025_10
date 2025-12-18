@@ -31,9 +31,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        for rect in UI.rectField.RectField.listOfRects:
-            if rect.changeColor(event) != None:
-                grid.color = rect.changeColor(event)
+        for rect in UI.rectField.RectField.listOfRects():
+                if rect.changeColor(event) != None:
+                    grid.color = rect.changeColor(event)
     #        UI.rectangle.rectangle.changeColor
     #        rect.changeColor(event)
     
@@ -53,6 +53,6 @@ while running:
         # elif event.type == pygame.KEYDOWN:
             # if event.key == pygame.K_RIGHT:
                 # a += 1
-     # screen.fill(WHITE)
+     #screen.fill(WHITE)
     pygame.display.flip()
 pygame.quit()

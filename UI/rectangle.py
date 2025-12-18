@@ -13,19 +13,22 @@ class Rectangle:
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
 
+
     # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
     def changeColor(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_h:
+            if event.key == pygame.K_o:
                 self.color = (255, 0, 0) #red
                 print(self.color)
-            elif event.key == pygame.K_a:
+            elif event.key == pygame.K_s:
+                self.color = (0, 0, 255) #blue
                 print("Rechts")
-            elif event.key == pygame.K_ESCAPE:
+            elif event.key == pygame.K_f:
+                self.color = (255, 255, 0) #yellow
                 print("ESC gedrückt")
 
         self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
-    
+
 
         #if self.objectRect.collidepoint(mouse_pos):
         #     if event.type == pygame.KEYDOWN:

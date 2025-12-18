@@ -24,8 +24,9 @@ class RectField:
             for column in range(1, RectField.numColumns + 1):
                 self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color))
                 x += RectField.rectWidth
-                # print(self.listOfRect)
+                print(self.listOfRects)
                 #print([row, column])
             y += RectField.rectHeight
             x = RectField.xReset
         y = RectField.yReset
+        print(self.color)
