@@ -17,32 +17,21 @@ WHITE = (255, 255, 255)
 mousePos = pygame.mouse.get_pos()
 
 grid = UI.rectField.RectField(screen = screen, numColumns = numColumns, numRows = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
-                              xReset = 0, yReset = 0, color = WHITE) #mousePos = mousePos
+                              xReset = 0, yReset = 0, color = WHITE, mousePos = mousePos)
 
 
 running = True
 while running:
     mousePos = pygame.mouse.get_pos()
-    # rect = UI.Rects(screen = screen, rectHeight = squareScreenWidth / numRectHeight, rectWidth = squareScreenHeight / numRectWidth, 
-    #                 numRectWidth = numRectWidth, numRectHeight = numRectHeight, startX = 0, startY = 0, color = WHITE, mousePos = mousePos)
-    # grid.mousePos = mousePos
-
-
+    grid.mousePos = mousePos
+    grid.updateMousePos()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        for rect in UI.rectField.RectField.listOfRects():
+        for rect in UI.rectField.RectField.listOfRects:
                 if rect.changeColor(event) != None:
                     grid.color = rect.changeColor(event)
-    #        UI.rectangle.rectangle.changeColor
-    #        rect.changeColor(event)
-    
-    # if screenUpdate:
-    #     screenUpdate = False
-    
-    #grid.drawField()
-    
-
 
     i = UI.rectField.RectField.listOfRects[0]
     # aStar.dijkstra.dijkstra(i)

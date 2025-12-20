@@ -2,10 +2,10 @@ import pygame
 pygame.init()
 
 
-
 # Ist die Klasse für jedes einzelne Rechteck.
 class Rectangle:
-    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color):
+    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos):
+        self.mousePos = mousePos
         self.screen = screen
         self.rect = (leftTopX, leftTopY, width, height)
         self.color = color
@@ -16,16 +16,20 @@ class Rectangle:
 
     # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
     def changeColor(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_o:
-                self.color = (255, 0, 0) #red
-                print(self.color)
-            elif event.key == pygame.K_s:
-                self.color = (0, 0, 255) #blue
-                print("Rechts")
-            elif event.key == pygame.K_f:
-                self.color = (255, 255, 0) #yellow
-                print("ESC gedrückt")
+        if self.objectRect.collidepoint(self.mousePos):
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_o:
+                    self.color = (255, 0, 0) #red
+                    print(self.color)
+                elif event.key == pygame.K_s:
+                    self.color = (0, 0, 255) #blue
+                    print(self.color)
+                elif event.key == pygame.K_f:
+                    self.color = (255, 255, 0) #yellow
+                    print(self.color)
+                elif event.key == pygame.K_r:
+                    self.color = (255, 255, 255) #white
+                    print(self.color)
 
         self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
 
