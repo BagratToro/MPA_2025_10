@@ -23,9 +23,19 @@ class RectField:
         y = RectField.yReset
         for row in range(1, RectField.numRows + 1):
             for column in range(1, RectField.numColumns + 1):
+                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color, self.mousePos, False))
+<<<<<<< .mine
                 self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color, self.mousePos))
+=======
+                self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color, False))
+>>>>>>> .theirs
                 x += RectField.rectWidth
+                # print(self.listOfRects)
+<<<<<<< .mine
                 #print(self.listOfRects)
+=======
+                # print(self.listOfRects)
+>>>>>>> .theirs
                 #print([row, column])
                 #print(self.mousePos)
             y += RectField.rectHeight

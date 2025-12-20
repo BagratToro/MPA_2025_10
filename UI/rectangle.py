@@ -4,7 +4,7 @@ pygame.init()
 
 # Ist die Klasse für jedes einzelne Rechteck.
 class Rectangle:
-    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos):
+    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos, visited):
         self.mousePos = mousePos
         self.screen = screen
         self.rect = (leftTopX, leftTopY, width, height)
@@ -12,6 +12,7 @@ class Rectangle:
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
+        self.visited = visited
 
 
     # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
