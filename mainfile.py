@@ -7,8 +7,8 @@ pygame.init()
 screenUpdate = True
 squareScreenHeight = 700
 squareScreenWidth = 700
-numRows = 4
-numColumns = 4
+numRows = 20
+numColumns = 20
 buttonSpace = 100
 screenWidth = squareScreenWidth
 screenHeight = squareScreenHeight + buttonSpace
@@ -37,12 +37,12 @@ while running:
                     rect.changeColor(event)
     
 
-    startRect = UI.rectField.RectField.listOfRects[0]
-    destRect = UI.rectField.RectField.listOfRects[15]
-    obstacle1 = UI.rectField.RectField.listOfRects[5]
-    obstacle2 = UI.rectField.RectField.listOfRects[7]
-    obstacle1.color = GREY
-    obstacle2.color = GREY
+    # startRect = UI.rectField.RectField.listOfRects[0]
+    # destRect = UI.rectField.RectField.listOfRects[15]
+    # obstacle1 = UI.rectField.RectField.listOfRects[5]
+    # obstacle2 = UI.rectField.RectField.listOfRects[7]
+    # obstacle1.color = GREY
+    # obstacle2.color = GREY
     # for obstacle in range(100, 119):
     #      UI.rectField.RectField.listOfRects[obstacle].color = GREY
     # for obstacle in range(150, 160):
@@ -55,14 +55,14 @@ while running:
     #      UI.rectField.RectField.listOfRects[obstacle].color = GREY
     # for obstacle in range(250, 253):
     #      UI.rectField.RectField.listOfRects[obstacle].color = GREY
-    startRect.color = BLUE
-    destRect.color = YELLOW
+    # startRect.color = BLUE
+    # destRect.color = YELLOW
 
     # for i in aStar.dijkstra.dijkstra(startRect, GREY, YELLOW):
     #      if i[1]:
     #           print(i)
     # print(aStar.dijkstra.dijkstra(startRect, GREY, YELLOW))
-    aStar.dijkstra.dijkstra(startRect, GREY, YELLOW)
+    # aStar.dijkstra.dijkstra(startRect, GREY, YELLOW)
     
     # aStar.dijkstra.dijkstra(i)
     # connections = utils.connections(i)
