@@ -1,5 +1,13 @@
 import UI.rectField
 from enum import Enum
+
+GREY = (128, 128, 128)
+YELLOW = (255, 255, 0)
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 128, 0)
+
 # def connections(rect): # i is a object from rectangle
 #     # i = UI.rectField.RectField.listOfRects[115]
 #     # print(i.row, i.column)
@@ -32,7 +40,7 @@ from enum import Enum
 #     return rectList
 
 
-# Gibt den oberen Nachbarn eines beliebigen Rechtecks zurück.
+# An Enum (or enumeration) is a special class used to create a set of named constants.
 class Neighbour(Enum):
     LEFT = 1
     UP = 2
@@ -55,8 +63,10 @@ def connection(rect, neighbour):
             if rect.row < UI.rectField.RectField.numRows - 1:
                 index = (rect.row + 1) * UI.rectField.RectField.numColumns + rect.column
 
-    print(rect.row, rect.column, neighbour, index)
+    # print(rect.row, rect.column, neighbour, index)
     if index != -1:
+        aa = UI.rectField.RectField.listOfRects[index]
+        # print(aa.row, aa.column)
         return UI.rectField.RectField.listOfRects[index]
     else:
         return None

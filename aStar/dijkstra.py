@@ -1,50 +1,50 @@
 import utils
 import UI.rectField
 
-path = []
 
-def distance(rect):
-    utils.connections(rect)
 
-    # for rect in listOfUnvisitedRects:
-    #     if rect.color == (255, 255, 0): #yellow
-    #         return 
-    #     if rect.color == (255, 165, 0): #orange
-    #         endRect = rect
-    #     if rect.color == (128, 128, 128): #grey
-    #         return 
-    #     listOfRects = UI.rectField.RectField.listOfRects
-    # listOfVisitedRects = []
-    # listOfUnvisitedRects = [listOfRects]
+def runDijkstraRekursive():
+    path = dijkstraRekursive(getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW)
+    print(path[1])
+    drawPath(path[0])
 
-def dijkstra(rect, obstacleColor, destinationColor): # gives back the "path" and a boolean, if it reached the destination. Needs a starting rect
+def dijkstraRekursive(rect, obstacleColor, destinationColor): # gives back the "path" and a boolean, if it reached the destination. Needs a starting rect
     optimalPath = None
     
     if rect == None:
         return optimalPath
-    print(rect.row, rect.column)
+    # print(rect.row, rect.column)
     
     if rect.color == destinationColor:
         return ([rect], True)
     
-    if (rect.color == obstacleColor) or (rect.visited):
+    if (rect.color == obstacleColor):
         return ([rect], False)
     
-    rect.visited = True
-    pathLeft = dijkstra(utils.connection(rect, utils.Neighbour.LEFT), obstacleColor, destinationColor)
-    pathUp = dijkstra(utils.connection(rect, utils.Neighbour.UP), obstacleColor, destinationColor)
-    pathRight = dijkstra(utils.connection(rect, utils.Neighbour.RIGHT), obstacleColor, destinationColor)
-    pathDown = dijkstra(utils.connection(rect, utils.Neighbour.DOWN), obstacleColor, destinationColor)
-    
+    rect.processing = True
 
+    pathLeft = getPathIfNotVisited(utils.connection(rect, utils.Neighbour.LEFT), obstacleColor, destinationColor)
+    pathUp = getPathIfNotVisited(utils.connection(rect, utils.Neighbour.UP), obstacleColor, destinationColor)
+    pathRight = getPathIfNotVisited(utils.connection(rect, utils.Neighbour.RIGHT), obstacleColor, destinationColor)
+    pathDown = getPathIfNotVisited(utils.connection(rect, utils.Neighbour.DOWN), obstacleColor, destinationColor)
+
+    rect.processing = False
+    
     optimalPath = getOptimalPath(pathLeft, optimalPath)
     optimalPath = getOptimalPath(pathUp, optimalPath)
     optimalPath = getOptimalPath(pathRight, optimalPath)
     optimalPath = getOptimalPath(pathDown, optimalPath)
+    
     if optimalPath != None:
         optimalPath[0].insert(0, rect)
-    # print(optimalPath)
+    
     return optimalPath
+
+def getPathIfNotVisited(rect, obstacleColor, destinationColor):
+    path = None
+    if (rect != None) and (not rect.processing):
+        path = dijkstraRekursive(rect, obstacleColor, destinationColor)
+    return path
         
 def getOptimalPath(currentPath, optimalPath):
     if currentPath == None:
@@ -61,8 +61,34 @@ def getOptimalPath(currentPath, optimalPath):
     
     return optimalPath
 
-# def getStart(listOfRects, startColor):
-#     for rect in listOfRects:
-#         if rect.color == startColor:
-#             return rect
+def getStart(listOfRects, startColor):
+    for rect in listOfRects:
+        if rect.color == startColor:
+            return rect
+        
+def drawPath(path):
+    if path != None:
+        for rect in path:
+            rect.color = utils.GREEN
+
+
+
+def dijkstraIterative(rect, obstacleColor, destinationColor):
+    optimalPath = None
+    currentPath = None
+    while rect.color != destinationColor:
+        if rect == None:
+            continue
+        if rect.color == obstacleColor:
+            currentPath = None
+
+        
+
+
+
+
+
+
+
+
 
