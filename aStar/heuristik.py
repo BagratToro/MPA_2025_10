@@ -1,17 +1,43 @@
-from enum import Enum
+import utils
 
-class Orientation(Enum):
-    LEFT = 1
-    UP = 2
-    RIGHT = 3
-    DOWN = 4
+# Returns the location of the destination in relation to the given rect
+def orientation(rect, neighbour, destination):
+    cost = 0
+    if neighbour == None:
+        return cost
+    if rect.column > destination.column: # destination is left
+        if neighbour == utils.connection(rect, utils.Neighbour.LEFT):
+            cost = 0
+        if neighbour == utils.connection(rect, utils.Neighbour.RIGHT):
+            cost = 3
+        if (neighbour == utils.connection(rect, utils.Neighbour.UP)) or (neighbour == utils.connection(rect, utils.Neighbour.DOWN)):
+            cost = 2
+        return cost
+    
+    if rect.column < destination.column: # destination is right
+        if neighbour == utils.connection(rect, utils.Neighbour.RIGHT):
+            cost = 0
+        if neighbour == utils.connection(rect, utils.Neighbour.LEFT):
+            cost = 3
+        if (neighbour == utils.connection(rect, utils.Neighbour.UP)) or (neighbour == utils.connection(rect, utils.Neighbour.DOWN)):
+            cost = 2
+        return cost
+                
+    if rect.row > destination.row: # destination is up
+        if neighbour == utils.connection(rect, utils.Neighbour.UP):
+            cost = 0
+        if neighbour == utils.connection(rect, utils.Neighbour.DOWN):
+            cost = 3
+        if (neighbour == utils.connection(rect, utils.Neighbour.RIGHT)) or (neighbour == utils.connection(rect, utils.Neighbour.LEFT)):
+            cost = 2
+        return cost
 
-def orientation(rect, destination):            #Returns the location of the destination in relation to the given rect
-    if rect.column > destination.column:
-        return Orientation.LEFT
-    if rect.column < destination.column:
-        return Orientation.RIGHT
-    if rect.row > destination.row:
-        return Orientation.UP
-    if rect.row < destination.row:
-        return Orientation.DOWN
+    if rect.row < destination.row: # destination is down
+        if neighbour == utils.connection(rect, utils.Neighbour.DOWN):
+            cost = 0
+        if neighbour == utils.connection(rect, utils.Neighbour.UP):
+            cost = 3
+        if (neighbour == utils.connection(rect, utils.Neighbour.RIGHT)) or (neighbour == utils.connection(rect, utils.Neighbour.LEFT)):
+            cost = 2
+        return cost
+    

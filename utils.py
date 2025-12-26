@@ -7,46 +7,18 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 128, 0)
-
-# def connections(rect): # i is a object from rectangle
-#     # i = UI.rectField.RectField.listOfRects[115]
-#     # print(i.row, i.column)
-#     rectList = []
-#     # connection = []
-#     # listOfConnections = []
-#     # for i in UI.rectField.RectField.listOfRects:
-#     #     if i.column != 20 and :
-#     #         listOfConnections.append([i.columnm, i.column + 1])
-#     #     if i.row
-#     # for j in UI.rectField.RectField.listOfRects:
-#         # if ((i.rectNum + 1) == j.rectNum) or ((i.rectNum - 1) == j.rectNum) or ((i.rectNum + UI.rectField.RectField.numRectHorizontal) == j.rectNum) or ((i.rectNum - UI.rectField.RectField.numRectHorizontal) == j.rectNum):
-#             # if j.color != (0, 0, 0):
-#                 # rectNumList.append(j)
-    
-#     # For right and left neighbors.
-#     if rect.column > 0:
-#         rectList.append( UI.rectField.RectField.listOfRects[rect.row * UI.rectField.RectField.numColumns + rect.column - 1])
-
-#     if rect.column < UI.rectField.RectField.numColumns - 1:
-#         rectList.append( UI.rectField.RectField.listOfRects[rect.row * UI.rectField.RectField.numColumns + rect.column + 1])
-
-#     # For up  and down neighbors.
-#     if rect.row > 0:
-#         rectList.append( UI.rectField.RectField.listOfRects[(rect.row - 1) * UI.rectField.RectField.numColumns + rect.column])
-
-#     if rect.row < UI.rectField.RectField.numRows - 1:
-#         rectList.append( UI.rectField.RectField.listOfRects[(rect.row + 1) * UI.rectField.RectField.numColumns + rect.column])
-    
-#     return rectList
-
+BROWN = (150, 75, 0)
 
 # An Enum (or enumeration) is a special class used to create a set of named constants.
+# Here it represends every neighbour of a rectangle.
 class Neighbour(Enum):
     LEFT = 1
     UP = 2
     RIGHT = 3
     DOWN = 4
 
+# This function calculates every neighbour of a rectangle.
+# A neighbour of a rectangle must touch the rectangle and be either straight left, up, right or under the rectangle.
 def connection(rect, neighbour):
     index = -1
     match neighbour:
@@ -65,7 +37,6 @@ def connection(rect, neighbour):
 
     # print(rect.row, rect.column, neighbour, index)
     if index != -1:
-        aa = UI.rectField.RectField.listOfRects[index]
         # print(aa.row, aa.column)
         return UI.rectField.RectField.listOfRects[index]
     else:
@@ -102,3 +73,24 @@ def connection(rect, neighbour):
 #     else:
 #         return None
 
+# Searches for the start of the path with the color attribute of the rect. 
+def getStart(listOfRects, startColor):
+    for rect in listOfRects:
+        if rect.color == startColor:
+            return rect
+        
+def getDest(listOfRects, destColor):
+    for rect in listOfRects:
+        if rect.color == destColor:
+            return rect    
+
+
+def getRect(row, column):
+    index = row * UI.rectField.RectField.numColumns + column
+    return UI.rectField.RectField.listOfRects[index]
+
+def drawPath(path, color, ignoreColors):
+    if path != None:
+        for rect in path:
+            if not rect.color in ignoreColors:
+                rect.color = color

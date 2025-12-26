@@ -1,12 +1,13 @@
 import pygame
 import aStar.dijkstra
+import aStar.aStar
 import utils
 pygame.init()
 
 
 # Ist die Klasse für jedes einzelne Rechteck.
 class Rectangle:
-    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos, processing):
+    def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos):
         self.mousePos = mousePos
         self.screen = screen
         self.rect = (leftTopX, leftTopY, width, height)
@@ -14,7 +15,15 @@ class Rectangle:
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
-        self.processing = processing
+        self.cost = float("inf")
+        # self.processing = False
+        # self.visited = False
+
+    def __eq__(self, other):
+        return isinstance(other, Rectangle) and self.row == other.row and self.column == other.column
+    
+    def __hash__(self):
+        return hash((self.row, self.column))
 
 
     # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
@@ -26,8 +35,8 @@ class Rectangle:
                     print(self.color)
                 elif event.key == pygame.K_s:
                     self.color = utils.BLUE #blue
-                    aStar.dijkstra.runDijkstraRekursive()
-                    # aStar.dijkstra.drawPath(aStar.dijkstra.runDijkstra())
+                    aStar.aStar.runAStar()
+                    # aStar.dijkstra.runDijkstra()
                     print(self.color)
                 elif event.key == pygame.K_f:
                     self.color = utils.YELLOW #yellow
@@ -35,6 +44,8 @@ class Rectangle:
                 elif event.key == pygame.K_r:
                     self.color = utils.WHITE #white
                     print(self.color)
+                elif event.key == pygame.K_m:
+                    self.color = utils.BROWN
 
         self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
 
