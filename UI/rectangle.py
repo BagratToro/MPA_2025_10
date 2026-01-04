@@ -5,7 +5,7 @@ import utils
 pygame.init()
 
 
-# Ist die Klasse für jedes einzelne Rechteck.
+#The class for a single rectangle. (Ist die Klasse für jedes einzelne Rechteck.)
 class Rectangle:
     def __init__(self, screen, leftTopX, leftTopY, width, height, row, column, color, mousePos):
         self.mousePos = mousePos
@@ -26,7 +26,7 @@ class Rectangle:
         return hash((self.row, self.column))
 
 
-    # Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.
+    #Changes the color of a rectangle based on the input of the user. (Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.)
     def changeColor(self, event):
         if self.objectRect.collidepoint(self.mousePos):
             if event.type == pygame.KEYDOWN:
