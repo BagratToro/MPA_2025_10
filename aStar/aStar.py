@@ -1,13 +1,20 @@
 import heapq
 import utils
-import aStar.dijkstra
+# import aStar.dijkstra
 import aStar.heuristik
 import UI.rectField
-import itertools
 
 def runAStar():
-    path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-    utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
+    numDest = 0
+    numStart = 0
+    for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == utils.BLUE:
+            numStart += 1
+        if rect.color == utils.YELLOW:
+            numDest += 1
+    if (numDest == 1) and (numStart == 1):
+        path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+        utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
 
 def rectCost(rect, slowColor):
     if rect.color == slowColor:
@@ -15,7 +22,7 @@ def rectCost(rect, slowColor):
     return 1
 
 def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
-    counter = itertools.count()
+    counter = 0
     startRect.cost = 0
     priorityQueue = [(startRect.cost, counter, startRect)]
     checkedRect = []
@@ -56,7 +63,8 @@ def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
             if (neighbour not in distance) or (neighbour.cost < distance[neighbour]):
                 distance[neighbour] = neighbour.cost
                 previousRect[neighbour] = rect
-                heapq.heappush(priorityQueue, (neighbour.cost, next(counter), neighbour))
+                counter += 1
+                heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
         
         
         utils.drawPath(checkedRect, utils.GREY, [utils.YELLOW, utils.BLUE, utils.RED])

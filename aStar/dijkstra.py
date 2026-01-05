@@ -2,7 +2,6 @@ import copy
 import utils
 import UI.rectField
 from collections import deque
-import itertools
 
 # Is a structur which storts a list automaticaly from smallest to biggest
 import heapq
@@ -14,12 +13,16 @@ import heapq
 #     drawPath(path[0])
 
 def runDijkstra():
-    # ignoreColors = set()
-    # ignoreColors.add()
-    # ignoreColors.add()
-    # path = dijkstraIterative(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW)
-    path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-    utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
+    numDest = 0
+    numStart = 0
+    for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == utils.BLUE:
+            numStart += 1
+        if rect.color == utils.YELLOW:
+            numDest += 1
+    if (numDest == 1) and (numStart == 1):
+        path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+        utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
 
 
 # def dijkstraRekursive(rect, obstacleColor, destinationColor): # gives back the "path" and a boolean, if it reached the destination. Needs a starting rect
@@ -150,7 +153,7 @@ def rectCost(rect, slowColor):
     return 1
 
 def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
-    counter = itertools.count()
+    counter = 0
     startRect.cost = 0
     priorityQueue = [(startRect.cost, counter, startRect)]
     checkedRect = []
@@ -190,13 +193,13 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
             if (neighbour not in distance) or (neighbour.cost < distance[neighbour]):
                 distance[neighbour] = neighbour.cost
                 previousRect[neighbour] = rect
-                heapq.heappush(priorityQueue, (neighbour.cost, next(counter), neighbour))
+                counter += 1
+                heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
                 
             utils.drawPath(checkedRect, utils.GREY, [utils.YELLOW, utils.BLUE, utils.RED])
         
     rect = utils.getRect(rect.row, rect.column)    
     path = []
-    point = (rect.row, rect.column)
     while rect != None:
         pathRect = rect
         path.append(pathRect)

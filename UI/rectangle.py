@@ -19,11 +19,11 @@ class Rectangle:
         # self.processing = False
         # self.visited = False
 
-    def __eq__(self, other):
-        return isinstance(other, Rectangle) and self.row == other.row and self.column == other.column
+    # def __eq__(self, other):
+    #     return isinstance(other, Rectangle) and self.row == other.row and self.column == other.column
     
-    def __hash__(self):
-        return hash((self.row, self.column))
+    # def __hash__(self):
+    #     return hash((self.row, self.column))
 
 
     #Changes the color of a rectangle based on the input of the user. (Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.)

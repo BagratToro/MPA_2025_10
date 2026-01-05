@@ -85,7 +85,6 @@ def getDest(listOfRects, destColor):
         if rect.color == destColor:
             return rect    
 
-
 def getRect(row, column):
     index = row * UI.rectField.RectField.numColumns + column
     return UI.rectField.RectField.listOfRects[index]
