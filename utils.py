@@ -1,4 +1,5 @@
 import UI.rectField
+import pygame
 from enum import Enum
 
 GREY = (128, 128, 128)
@@ -17,6 +18,13 @@ class Neighbour(Enum):
     UP = 2
     RIGHT = 3
     DOWN = 4
+
+class RectType(Enum):
+    Start = 1
+    Finish = 2
+    Obstacle = 3
+    Mud = 4
+    Blank = 5
 
 # This function calculates every neighbour of a rectangle.
 # A neighbour of a rectangle must touch the rectangle and be either straight left, up, right or under the rectangle.
@@ -94,3 +102,4 @@ def drawPath(path, color, ignoreColors):
         for rect in path:
             if not rect.color in ignoreColors:
                 rect.color = color
+            rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)

@@ -1,8 +1,8 @@
-import copy
+#import copy
 import utils
 import UI.rectField
-from collections import deque
-
+#from collections import deque
+import pygame
 # Is a structur which storts a list automaticaly from smallest to biggest
 import heapq
 
@@ -16,6 +16,9 @@ def runDijkstra():
     numDest = 0
     numStart = 0
     for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == utils.GREEN or rect.color == utils.GREY:
+            rect.color = utils.WHITE
+        rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
         if rect.color == utils.BLUE:
             numStart += 1
         if rect.color == utils.YELLOW:

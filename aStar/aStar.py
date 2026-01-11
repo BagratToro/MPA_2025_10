@@ -3,11 +3,15 @@ import utils
 # import aStar.dijkstra
 import aStar.heuristik
 import UI.rectField
+import pygame
 
 def runAStar():
     numDest = 0
     numStart = 0
     for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == utils.GREEN or rect.color == utils.GREY:
+            rect.color = utils.WHITE
+        rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
         if rect.color == utils.BLUE:
             numStart += 1
         if rect.color == utils.YELLOW:

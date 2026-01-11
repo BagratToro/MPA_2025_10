@@ -1,6 +1,6 @@
 import pygame
-import aStar.dijkstra
-import aStar.aStar
+#import aStar.dijkstra
+#import aStar.aStar
 import utils
 pygame.init()
 
@@ -27,25 +27,26 @@ class Rectangle:
 
 
     #Changes the color of a rectangle based on the input of the user. (Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.)
-    def changeColor(self, event):
+    def changeColor(self, event, type):
         if self.objectRect.collidepoint(self.mousePos):
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_o:
-                    self.color = utils.RED #red
-                    print(self.color)
-                elif event.key == pygame.K_s:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if type == utils.RectType.Start:
                     self.color = utils.BLUE #blue
-                    aStar.aStar.runAStar()
-                    # aStar.dijkstra.runDijkstra()
                     print(self.color)
-                elif event.key == pygame.K_f:
+                elif type == utils.RectType.Finish:
                     self.color = utils.YELLOW #yellow
                     print(self.color)
-                elif event.key == pygame.K_r:
+                elif type == utils.RectType.Obstacle:
+                    self.color = utils.RED #red
+                    print(self.color)
+                elif type == utils.RectType.Mud:
+                    self.color = utils.BROWN #brown
+                    print(self.color)
+                elif type == utils.RectType.Blank:
                     self.color = utils.WHITE #white
                     print(self.color)
-                elif event.key == pygame.K_m:
-                    self.color = utils.BROWN
+                #elif event.key == pygame.K_m:
+                    #self.color = utils.BROWN
 
         self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
 
