@@ -18,37 +18,39 @@ class Button():
         self.width = width
         self.height = height
         self.buttonTypeToggle = buttonTypeToggle
-        if self.buttonTypeToggle == True:
-            self.pressed = False
+        self.pressed = False
         self.function = function
-        self.pressed = pressed
           
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRectangle = pygame.Rect(self.leftX, self.topY, self.width, self.height)
-        self.buttonText = pygame.font.SysFont('Arial', 40).render(displayedText, True, (30, 30, 30))
+        self.buttonText = pygame.font.SysFont('Arial', 40).render(displayedText, True, (utils.WHITE))
           
         listOfButtons.append(self)
 
+    def getPressed(self):
+        return self.pressed
 
     def check(self, event):
         self.event = event
         if self.pressed != True:
-            self.buttonSurface.fill(utils.GREEN)
+            self.buttonSurface.fill(utils.BLUE)
         else: 
-            self.buttonSurface.fill(utils.RED)
+            self.buttonSurface.fill(utils.DARKBLUE)
         if self.buttonRectangle.collidepoint(pygame.mouse.get_pos()):
-            self.buttonSurface.fill(utils.YELLOW)
+            self.buttonSurface.fill(utils.GREEN)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    self.buttonSurface.fill(utils.RED)
+                    self.buttonSurface.fill(utils.DARKBLUE)
                     if self.buttonTypeToggle == False:
                         self.function()
                     elif self.pressed == False:
+                        for button in listOfButtons:
+                            button.pressed = False
                         self.pressed = True
-                        print("toggle on")
+                        if self.function != None:
+                            self.function()
                     else:
                         self.pressed = False
-                        print("toggle off")
 
 
         self.buttonSurface.blit(self.buttonText, [
@@ -57,6 +59,4 @@ class Button():
         ])
         self.screen.blit(self.buttonSurface, self.buttonRectangle)
 
-
-    def getPressed(self):
-        return self.pressed
+        pygame.draw.rect(self.screen, utils.BLACK, self.buttonRectangle, 1)

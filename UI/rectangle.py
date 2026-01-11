@@ -32,19 +32,14 @@ class Rectangle:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if type == utils.RectType.Start:
                     self.color = utils.BLUE #blue
-                    print(self.color)
                 elif type == utils.RectType.Finish:
                     self.color = utils.YELLOW #yellow
-                    print(self.color)
                 elif type == utils.RectType.Obstacle:
-                    self.color = utils.RED #red
-                    print(self.color)
+                        self.color = utils.RED #red
                 elif type == utils.RectType.Mud:
                     self.color = utils.BROWN #brown
-                    print(self.color)
                 elif type == utils.RectType.Blank:
                     self.color = utils.WHITE #white
-                    print(self.color)
                 #elif event.key == pygame.K_m:
                     #self.color = utils.BROWN
 

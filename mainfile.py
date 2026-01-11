@@ -24,24 +24,21 @@ clock = pygame.time.Clock()
 
 mousePos = pygame.mouse.get_pos()
 
-def testFunction():
-    print('HelloWorld!')
-
 grid = UI.rectField.RectField(screen = screen, numColumns = numColumns, numRows = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
                               xReset = 0, yReset = 0, color = utils.WHITE, mousePos = mousePos)
 
-Start = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Start')
-Finish = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Finish')
-Obstacle = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Obstacle')
-Mud = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Mud')
-Delete = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Delete')
-Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText= 'Reset', function = testFunction)
+Start = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Start', function = None)
+Finish = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Finish', function = None)
+Obstacle = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Obstacle', function = None)
+Mud = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Mud', function = None)
+Delete = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Delete', function = utils.clearPath)
+Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText= 'Reset', function = utils.reset)
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
 running = True
 while running:
-    clock.tick(30)
+    clock.tick(60)
 
     mousePos = pygame.mouse.get_pos()
     grid.mousePos = mousePos

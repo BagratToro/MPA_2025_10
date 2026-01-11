@@ -31,7 +31,6 @@ class RectField:
             y += RectField.rectHeight
             x = RectField.xReset
         y = RectField.yReset
-        print(self.color)
 
 
     def updateMousePos(self):
