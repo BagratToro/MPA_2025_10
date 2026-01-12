@@ -25,7 +25,7 @@ def rectCost(rect, slowColor):
 def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
     counter = 0
     startRect.cost = 0
-    priorityQueue = [(startRect.cost, counter, startRect)]
+    priorityQueue = [(startRect.cost, 0, counter, startRect)]
     checkedRect = []
     destination = utils.getDest(UI.rectField.RectField.listOfRects, utils.YELLOW)
     
@@ -37,7 +37,7 @@ def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
     # That's why the algorythm uses heap and pops always from the beginning.
     while priorityQueue:
         currentItem = heapq.heappop(priorityQueue)
-        (currentCost, placeHolder, rect) = currentItem
+        (currentCost, placeHolder1, placeHolder2, rect) = currentItem
 
         # The while loop should end, whenever it gets to the destination -> *früh stopp* Dijkstra !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if rect.color == destinationColor:
@@ -57,15 +57,16 @@ def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
             if neighbour.color == obstacleColor:
                 continue
 
-            neighbour.cost = rectCost(neighbour, slowColor)
-            neighbour.cost += aStar.heuristik.orientation(rect, neighbour, destination)
+            heuristik = aStar.heuristik.heuristik(neighbour, destination) * rectCost(neighbour, slowColor)
+            neighbour.cost = 1
+            neighbour.cost += heuristik
             neighbour.cost += currentCost
 
             if (neighbour not in distance) or (neighbour.cost < distance[neighbour]):
                 distance[neighbour] = neighbour.cost
                 previousRect[neighbour] = rect
                 counter += 1
-                heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
+                heapq.heappush(priorityQueue, (neighbour.cost, heuristik, counter, neighbour))
         
         
         utils.drawPath(checkedRect, utils.GREY, [utils.YELLOW, utils.BLUE, utils.RED])

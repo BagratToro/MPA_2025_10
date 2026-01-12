@@ -41,3 +41,8 @@ def orientation(rect, neighbour, destination):
             cost = 2
         return cost
     
+
+def heuristik(rect, destination):
+    cost = 0
+    cost = abs(rect.row - destination.row) + abs(rect.column - destination.column) 
+    return cost
