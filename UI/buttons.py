@@ -38,19 +38,18 @@ class Button():
             self.buttonSurface.fill(utils.DARKBLUE)
         if self.buttonRectangle.collidepoint(pygame.mouse.get_pos()):
             self.buttonSurface.fill(utils.GREEN)
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    self.buttonSurface.fill(utils.DARKBLUE)
-                    if self.buttonTypeToggle == False:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                self.buttonSurface.fill(utils.DARKBLUE)
+                if self.buttonTypeToggle == False:
+                    self.function()
+                elif self.pressed == False:
+                    for button in listOfButtons:
+                        button.pressed = False
+                    self.pressed = True
+                    if self.function != None:
                         self.function()
-                    elif self.pressed == False:
-                        for button in listOfButtons:
-                            button.pressed = False
-                        self.pressed = True
-                        if self.function != None:
-                            self.function()
-                    else:
-                        self.pressed = False
+                else:
+                    self.pressed = False
 
 
         self.buttonSurface.blit(self.buttonText, [
