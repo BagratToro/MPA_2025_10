@@ -30,16 +30,17 @@ class Rectangle:
     def changeColor(self, event, type):
         if self.objectRect.collidepoint(self.mousePos):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if type == utils.RectType.Start:
-                    self.color = utils.BLUE #blue
-                elif type == utils.RectType.Finish:
-                    self.color = utils.YELLOW #yellow
-                elif type == utils.RectType.Obstacle:
+                match type:
+                    case utils.RectType.Start:
+                        self.color = utils.BLUE #blue
+                    case utils.RectType.Finish:
+                        self.color = utils.YELLOW #yellow
+                    case utils.RectType.Obstacle:
                         self.color = utils.RED #red
-                elif type == utils.RectType.Mud:
-                    self.color = utils.BROWN #brown
-                elif type == utils.RectType.Blank:
-                    self.color = utils.WHITE #white
+                    case utils.RectType.Mud:
+                        self.color = utils.BROWN #brown
+                    case utils.RectType.Blank:
+                        self.color = utils.WHITE #white
                 #elif event.key == pygame.K_m:
                     #self.color = utils.BROWN
 

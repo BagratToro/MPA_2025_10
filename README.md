@@ -6,7 +6,7 @@ It is devided in three parts:
 
 Bagrat does the dijkstra part and connections.
 Clemens does the UI.
-Nils does the heuristik part, the buttons and miscellaneous fetures.
+Nils does the heuristik part, the buttons and miscellaneous features.
 
 
 the final route is green
