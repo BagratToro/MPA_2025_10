@@ -46,8 +46,7 @@ class Button():
                     for button in listOfButtons:
                         button.pressed = False
                     self.pressed = True
-                    if self.function != None:
-                        self.function()
+                    self.function()
                 else:
                     self.pressed = False
 

@@ -3,10 +3,13 @@ import utils
 # import aStar.dijkstra
 import aStar.heuristik
 import UI.rectField
+import UI.buttons
 
 def runAStar():
     numDest = 0
     numStart = 0
+    for button in UI.buttons.listOfButtons:
+        button.pressed = False
     utils.clearPath()
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == utils.BLUE:
@@ -15,7 +18,7 @@ def runAStar():
             numDest += 1
     if (numDest == 1) and (numStart == 1):
         path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-        utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
+        utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
 
 def rectCost(rect, slowColor):
     if rect.color == slowColor:
@@ -69,7 +72,7 @@ def aStarAlgorithm(startRect, obstacleColor, destinationColor, slowColor):
                 heapq.heappush(priorityQueue, (neighbour.cost, heuristik, counter, neighbour))
         
         
-        utils.drawPath(checkedRect, utils.GREY, [utils.YELLOW, utils.BLUE, utils.RED])
+        utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
           
     path = []
     while rect != None:

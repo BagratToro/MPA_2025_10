@@ -32,8 +32,10 @@ class Rectangle:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 match type:
                     case utils.RectType.Start:
+                        utils.exclusiveStart()
                         self.color = utils.BLUE #blue
                     case utils.RectType.Finish:
+                        utils.exclusiveFinish()
                         self.color = utils.YELLOW #yellow
                     case utils.RectType.Obstacle:
                         self.color = utils.RED #red

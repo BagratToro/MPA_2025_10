@@ -3,16 +3,16 @@ import pygame
 from enum import Enum
 
 GREY = (128, 128, 128)
+DARKGREY = (55, 55, 55)
 YELLOW = (255, 255, 0)
 BLUE = (0, 0, 255)
-DARKBLUE = (0, 0, 128)
+DARKBLUE = (0, 0, 139)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 128, 0)
+GREEN = (0, 255, 0)
+DARKGREEN = (0, 100, 0)
 BROWN = (150, 75, 0)
-DARKGREY = (80, 80, 80)
-
 
 # An Enum (or enumeration) is a special class used to create a set of named constants.
 # Here it represends every neighbour of a rectangle.
@@ -100,17 +100,33 @@ def getRect(row, column):
     index = row * UI.rectField.RectField.numColumns + column
     return UI.rectField.RectField.listOfRects[index]
 
-def drawPath(path, color, ignoreColors):
+def drawPath(path, color, mudColor):
     if path != None:
         for rect in path:
-            if not rect.color in ignoreColors:
+            if rect.color == BROWN or rect.color == DARKGREY:
+                rect.color = mudColor
+            elif not rect.color in [YELLOW, BLUE, RED, DARKGREY, DARKGREEN]:
                 rect.color = color
             rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
+
+def exclusiveStart():
+    for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == BLUE:
+            rect.color = WHITE
+        rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
+
+def exclusiveFinish():
+    for rect in UI.rectField.RectField.listOfRects:
+        if rect.color == YELLOW:
+            rect.color = WHITE
+        rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
 def clearPath():
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == GREEN or rect.color == GREY:
             rect.color = WHITE
+        elif rect.color == DARKGREEN or rect.color == DARKGREY:
+            rect.color = BROWN
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
 

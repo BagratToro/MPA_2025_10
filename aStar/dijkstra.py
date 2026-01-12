@@ -1,6 +1,7 @@
 #import copy
 import utils
 import UI.rectField
+import UI.buttons
 #from collections import deque
 # Is a structur which storts a list automaticaly from smallest to biggest
 import heapq
@@ -14,6 +15,8 @@ import heapq
 def runDijkstra():
     numDest = 0
     numStart = 0
+    for button in UI.buttons.listOfButtons:
+        button.pressed = False
     utils.clearPath()
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == utils.BLUE:
@@ -22,7 +25,7 @@ def runDijkstra():
             numDest += 1
     if (numDest == 1) and (numStart == 1):
         path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-        utils.drawPath(path, utils.GREEN, [utils.YELLOW, utils.BLUE])
+        utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
 
 
 # def dijkstraRekursive(rect, obstacleColor, destinationColor): # gives back the "path" and a boolean, if it reached the destination. Needs a starting rect
@@ -196,7 +199,7 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
                 counter += 1
                 heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
                 
-            utils.drawPath(checkedRect, utils.GREY, [utils.YELLOW, utils.BLUE, utils.RED])
+            utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
         
     rect = utils.getRect(rect.row, rect.column)    
     path = []
