@@ -29,9 +29,11 @@ grid = UI.rectField.RectField(screen = screen, numColumns = numColumns, numRows 
 
 Start = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Start', function = utils.clearPath)
 Finish = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Finish', function = utils.clearPath)
+
 Obstacle = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Obstacle', function = utils.clearPath)
 Mud = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Mud', function = utils.clearPath)
 Delete = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Delete', function = utils.clearPath)
+
 Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 2 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText= 'Reset', function = utils.reset)
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
@@ -39,6 +41,7 @@ Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, top
 running = True
 while running:
     clock.tick(60)
+    mouseInputs = pygame.mouse.get_pressed()
 
     mousePos = pygame.mouse.get_pos()
     grid.mousePos = mousePos
@@ -48,18 +51,19 @@ while running:
             running = False
         for button in UI.buttons.listOfButtons:
             button.check(event)
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            for rect in UI.rectField.RectField.listOfRects:
-                if Start.getPressed() == True:
-                    rect.changeColor(event, type = utils.RectType.Start)
-                elif Finish.getPressed() == True:
-                    rect.changeColor(event, type = utils.RectType.Finish)
-                elif Obstacle.getPressed() == True:
-                    rect.changeColor(event, type = utils.RectType.Obstacle)
-                elif Mud.getPressed() == True:
-                    rect.changeColor(event, type = utils.RectType.Mud)
-                elif Delete.getPressed() == True:
-                    rect.changeColor(event, type = utils.RectType.Blank)
+        # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+        
+        for rect in UI.rectField.RectField.listOfRects:
+            if Start.getPressed() == True:
+                rect.changeColor(event, mouseInputs, type = utils.RectType.Start)
+            elif Finish.getPressed() == True:
+                rect.changeColor(event, mouseInputs, type = utils.RectType.Finish)
+            elif Obstacle.getPressed() == True:
+                rect.changeColor(event, mouseInputs, type = utils.RectType.Obstacle)
+            elif Mud.getPressed() == True:
+                rect.changeColor(event, mouseInputs, type = utils.RectType.Mud)
+            elif Delete.getPressed() == True:
+                rect.changeColor(event, mouseInputs, type = utils.RectType.Blank)
             
             #if rect.changeColor(event) != None:
                 #rect.changeColor(event)

@@ -27,9 +27,10 @@ class Rectangle:
 
 
     #Changes the color of a rectangle based on the input of the user. (Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.)
-    def changeColor(self, event, type):
+    def changeColor(self, event, mouseInputs, type):
         if self.objectRect.collidepoint(self.mousePos):
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if mouseInputs[0]:
                 match type:
                     case utils.RectType.Start:
                         utils.exclusiveStart()
