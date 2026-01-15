@@ -1,4 +1,5 @@
 import UI.rectField
+import UI.buttons
 import pygame
 from enum import Enum
 
@@ -15,6 +16,7 @@ DARKGREEN = (0, 100, 0)
 BROWN = (150, 75, 0)
 
 textboxDisplayedText = 'Select a button'
+listOfButtons = []
 
 # An Enum (or enumeration) is a special class used to create a set of named constants.
 # Here it represends every neighbour of a rectangle.
@@ -49,43 +51,10 @@ def connection(rect, neighbour):
             if rect.row < UI.rectField.RectField.numRows - 1:
                 index = (rect.row + 1) * UI.rectField.RectField.numColumns + rect.column
 
-    # print(rect.row, rect.column, neighbour, index)
     if index != -1:
-        # print(aa.row, aa.column)
         return UI.rectField.RectField.listOfRects[index]
     else:
         return None
-
-# def upConnection(rect):
-#     if rect.row > 0:
-#         print((rect.row - 1) * UI.rectField.RectField.numColumns + rect.column)
-#         return UI.rectField.RectField.listOfRects[(rect.row - 1) * UI.rectField.RectField.numColumns + rect.column]
-#     else:
-#         return None
-    
-# # Gibt den unteren Nachbarn eines beliebigen Rechtecks zurück.
-# def downConnection(rect):
-#     if rect.row < UI.rectField.RectField.numRows - 1:
-#         print((rect.row + 1) * UI.rectField.RectField.numColumns + rect.column)
-#         return UI.rectField.RectField.listOfRects[(rect.row + 1) * UI.rectField.RectField.numColumns + rect.column]
-#     else:
-#         return None
-
-# # Gibt den linken Nachbarn eines beliebigen Rechtecks zurück.
-# def leftConnection(rect):
-#     if rect.column > 0:
-#         print(rect.row * UI.rectField.RectField.numColumns + rect.column - 1)
-#         return UI.rectField.RectField.listOfRects[rect.row * UI.rectField.RectField.numColumns + rect.column - 1]
-#     else:
-#         return None
-
-# # Gibt den rechten Nachbarn eines beliebigen Rechtecks zurück.
-# def rightConnection(rect):
-#     if rect.column < UI.rectField.RectField.numColumns - 1:
-#         print(rect.row * UI.rectField.RectField.numColumns + rect.column + 1)
-#         return UI.rectField.RectField.listOfRects[rect.row * UI.rectField.RectField.numColumns + rect.column + 1]
-#     else:
-#         return None
 
 # Searches for the start of the path with the color attribute of the rect. 
 def getStart(listOfRects, startColor):
@@ -96,7 +65,7 @@ def getStart(listOfRects, startColor):
 def getDest(listOfRects, destColor):
     for rect in listOfRects:
         if rect.color == destColor:
-            return rect    
+            return rect
 
 def getRect(row, column):
     index = row * UI.rectField.RectField.numColumns + column
@@ -131,8 +100,9 @@ def clearPath():
             rect.color = BROWN
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
-
 def reset():
+    for button in listOfButtons:
+        button.pressed = False
     for rect in UI.rectField.RectField.listOfRects:
         rect.color = WHITE
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)

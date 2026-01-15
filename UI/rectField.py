@@ -17,7 +17,7 @@ class RectField:
         self.drawField()
 
 
-    #Draws all rectangles and adds them to the "listofRects"as objects. (Zeichnet und fügt der Liste "listOfRects" alle Rechtecke als Objekte zu.)
+    # Draws all rectangles and adds them to the "listofRects"as objects. (Zeichnet und fügt der Liste "listOfRects" alle Rechtecke als Objekte zu.)
     def drawField(self):
         x = RectField.xReset
         y = RectField.yReset
@@ -25,9 +25,6 @@ class RectField:
             for column in range(1, RectField.numColumns + 1):
                 self.listOfRects.append(UI.rectangle.Rectangle(self.screen, x, y, RectField.rectWidth - 1, RectField.rectHeight - 1, row - 1, column - 1, self.color, self.mousePos))
                 x += RectField.rectWidth
-                # print(self.listOfRects)
-                #print([row, column])
-                #print(self.mousePos)
             y += RectField.rectHeight
             x = RectField.xReset
         y = RectField.yReset

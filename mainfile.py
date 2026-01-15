@@ -1,6 +1,5 @@
 import pygame
 import UI.rectField
-#import UI.rectangle
 import UI.buttons
 import UI.textbox
 import utils
@@ -11,15 +10,15 @@ import sys
 pygame.init()
 
 screenUpdate = True
-buttonSpace = 180 # Must be divisible by 3
-outputSpace = 80 # The sum outputSpace + buttonSpace must be equal to 240
 monitor = pygame.display.Info()
-squareScreenHeight = monitor.current_h - buttonSpace - outputSpace - 100
-squareScreenWidth = monitor.current_h - buttonSpace - outputSpace - 100
+outputSpace = monitor.current_h / 12
+buttonSpace = 2 * outputSpace
+squareScreenHeight = monitor.current_h - buttonSpace - 2 * outputSpace
+squareScreenWidth = monitor.current_h - buttonSpace - 2 * outputSpace
 numRows = 20
 numColumns = 20
-screenWidth = squareScreenWidth
-screenHeight = squareScreenHeight + outputSpace + buttonSpace
+screenWidth = monitor.current_h - 2 * outputSpace - buttonSpace
+screenHeight = monitor.current_h - outputSpace
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
 
@@ -39,7 +38,7 @@ Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY =
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
-textbox = UI.textbox.TextBox(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace)
+textbox = UI.textbox.TextBox(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace, screenHeight = monitor.current_h)
 
 
 
@@ -55,9 +54,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        for button in UI.buttons.listOfButtons:
+        for button in utils.listOfButtons:
             button.check(event)
-        # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
         
         for rect in UI.rectField.RectField.listOfRects:
             if Start.getPressed() == True:
@@ -71,18 +69,11 @@ while running:
                 utils.textboxDisplayedText='Allows you to declare a square as non tresspassable'
             elif Mud.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Mud)
-                utils.textboxDisplayedText='Allows you to declare a square as a worse path'
+                utils.textboxDisplayedText='Allows you to declare a square as a worse path \n(One mud tile is equivalent to five normal tiles)'
             elif Delete.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Blank)
                 utils.textboxDisplayedText='Allows you to clear a square'
-            #if rect.changeColor(event) != None:
-                #rect.changeColor(event)
-                #clock.tick(5)
 
-        # elif event.type == pygame.KEYDOWN:
-            # if event.key == pygame.K_RIGHT:
-                # a += 1
-     #screen.fill(WHITE)
     pygame.display.flip()
 pygame.quit()
 sys.exit()

@@ -1,25 +1,40 @@
 # MPA_2025_10
 Repository for MPA 2025/2026 development
 
-The projekt is to program the a* algorithm with pygame. 
-It is devided in three parts:
+The projekt is to program the a* and Dijkstra algorithm with pygame. 
 
-Bagrat does the dijkstra part and connections.
-Clemens does the UI.
-Nils does the heuristik part, the buttons and miscellaneous features.
+Algorithm:
 
+aStar.py:
+runAStar() did Nils P. and Bagrat T.
+The rest did Bagrat T.
 
-the final route is green
-the obstacles are red
-the start is blue
-the finish is yellow
-every other thing is white
+dijkstra.py:
+Same as above but with runDijkstra().
 
-Functionality:
-This programm shows the differences between the Dijkstra's algorithm and the a* algorithm.
-The user can create custom maps with the butons. 
-The butons:
-- The start buton creates a startpoint, from which there can only be one.
-- The finish buton creates a destination, again, there can only be one.
-- The obstacles buton creates red rectangles, where the algorithm can not take that block as a path. In the real world, it could be a house.
-- 
+UI:
+
+buttons.py:
+Nils P. did everything.
+
+rectangle.py:
+Clemens K. did init() alone.
+And the changeColor function did Nils P. and Clemens K.
+
+rectfield.py:
+Clemeens K. did everything.
+
+textbox.py:
+Nils P. did everything.
+
+General:
+
+mainfile.py:
+Everyone worked equally on this file.
+
+utils.py:
+Bagrat T. did connection(), getStart(), getDest(), getRect()
+drawPath() did Nils P. and Bagrat T.
+Nils P. did exclusiveStart(), exclusiveFinish(), clearPath(), reset()
+
+README.md did Nils P. and Bagrat T.

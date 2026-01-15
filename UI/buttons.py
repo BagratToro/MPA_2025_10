@@ -1,15 +1,11 @@
-#This file serves the implementation of buttons, mainly to enhance the user experience.
-
+# This file serves the implementation of buttons, mainly to enhance the user experience.
 import pygame
 import utils
 
 pygame.init()
 
-#List of all buttons
-listOfButtons=[]
-
-#(ButtonTypeToggle = True) The button executes it's associated function until pressed again.
-#(ButtonTypeToggle = False) The button executes it's associated function once.
+# (ButtonTypeToggle = True) The button executes it's associated function until pressed again.
+# (ButtonTypeToggle = False) The button executes it's associated function once.
 class Button():
     def __init__(self, screen, leftX, topY, width, height, buttonTypeToggle, displayedText = 'test', function = None, pressed = False):
         self.screen = screen
@@ -25,7 +21,7 @@ class Button():
         self.buttonRectangle = pygame.Rect(self.leftX, self.topY, self.width, self.height)
         self.buttonText = pygame.font.SysFont('Arial', 40).render(displayedText, True, (utils.WHITE))
           
-        listOfButtons.append(self)
+        utils.listOfButtons.append(self)
 
     def getPressed(self):
         return self.pressed
@@ -34,7 +30,7 @@ class Button():
         self.event = event
         if self.pressed != True:
             self.buttonSurface.fill(utils.BLUE)
-        else: 
+        else:
             self.buttonSurface.fill(utils.DARKBLUE)
         if self.buttonRectangle.collidepoint(pygame.mouse.get_pos()):
             self.buttonSurface.fill(utils.GREEN)
@@ -43,14 +39,13 @@ class Button():
                 if self.buttonTypeToggle == False:
                     self.function()
                 elif self.pressed == False:
-                    for button in listOfButtons:
+                    for button in utils.listOfButtons:
                         button.pressed = False
                     self.pressed = True
                     self.function()
                 else:
                     self.pressed = False
                     utils.textboxDisplayedText='Select a button'
-
 
         self.buttonSurface.blit(self.buttonText, [
             self.buttonRectangle.width/2 - self.buttonText.get_rect().width/2,
