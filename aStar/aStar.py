@@ -18,16 +18,16 @@ def runAStar():
             path = aStar(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
             if path[1] == False:
                 utils.drawPath(path[0], utils.GREY, utils.DARKGREEN)
-                utils.textboxDisplayedText='There is no possible path'
+                utils.outputDisplayedText='There is no possible path'
             else:
                 utils.drawPath(path[0], utils.GREEN, utils.DARKGREEN)
-                utils.textboxDisplayedText='Sucessfully ran the A* algorithm'
+                utils.outputDisplayedText='Sucessfully ran the A* algorithm'
         case 1 if numStart == 0:
-            utils.textboxDisplayedText='You need to select a starting \nsquare to run the A* algorithm'
+            utils.outputDisplayedText='You need to select a starting \nsquare to run the A* algorithm'
         case 0 if numStart == 1:
-            utils.textboxDisplayedText='You need to select a destination \nsquare to run the A* algorithm'
+            utils.outputDisplayedText='You need to select a destination \nsquare to run the A* algorithm'
         case 0 if numStart == 0:
-            utils.textboxDisplayedText='You need to select a starting square and \na destination square to run the A* algorithm'
+            utils.outputDisplayedText='You need to select a starting square and \n destination square to run the A* algorithm'
 
 def rectCost(rect, slowColor):
     if rect.color == slowColor:

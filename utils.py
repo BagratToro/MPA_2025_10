@@ -1,8 +1,8 @@
 import UI.rectField
-import UI.buttons
 import pygame
 from enum import Enum
 
+# Color tuples for conveniance purposes.
 GREY = (128, 128, 128)
 DARKGREY = (55, 55, 55)
 YELLOW = (255, 255, 0)
@@ -15,7 +15,10 @@ GREEN = (0, 255, 0)
 DARKGREEN = (0, 100, 0)
 BROWN = (150, 75, 0)
 
-textboxDisplayedText = 'Select a button'
+# Current Text being displayed on the output.
+outputDisplayedText = 'Select a button'
+
+# List of every Button present
 listOfButtons = []
 
 # An Enum (or enumeration) is a special class used to create a set of named constants.
@@ -80,18 +83,21 @@ def drawPath(path, color, mudColor):
                 rect.color = color
             rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
+# Clears old Start Tile to ensure that only 1 Start Tile may be present at once.
 def exclusiveStart():
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == BLUE:
             rect.color = WHITE
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
+# Same function for Finish Tiles.
 def exclusiveFinish():
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == YELLOW:
             rect.color = WHITE
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
+# Clears the marked Path and checked Tiles of the Algorithms to allow modification of the Tiles.
 def clearPath():
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == GREEN or rect.color == GREY:
@@ -100,11 +106,12 @@ def clearPath():
             rect.color = BROWN
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
 
+# Clears the whole Grid.
 def reset():
     for button in listOfButtons:
         button.pressed = False
     for rect in UI.rectField.RectField.listOfRects:
         rect.color = WHITE
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
-        global textboxDisplayedText
-        textboxDisplayedText='Sucessfully reset the field'
+        global outputDisplayedText
+        outputDisplayedText='Sucessfully reset the field'
