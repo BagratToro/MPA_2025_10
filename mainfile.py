@@ -2,6 +2,7 @@ import pygame
 import UI.rectField
 #import UI.rectangle
 import UI.buttons
+import UI.textbox
 import utils
 import aStar.dijkstra
 import aStar.aStar
@@ -38,6 +39,10 @@ Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY =
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
+textbox = UI.textbox.TextBox(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace, font = pygame.font.SysFont('Arial', 24))
+
+
+
 running = True
 while running:
     clock.tick(60)
@@ -64,7 +69,6 @@ while running:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Mud)
             elif Delete.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Blank)
-            
             #if rect.changeColor(event) != None:
                 #rect.changeColor(event)
                 #clock.tick(5)
