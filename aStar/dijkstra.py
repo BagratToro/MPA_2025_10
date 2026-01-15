@@ -23,9 +23,20 @@ def runDijkstra():
             numStart += 1
         if rect.color == utils.YELLOW:
             numDest += 1
-    if (numDest == 1) and (numStart == 1):
-        path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-        utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+    #if (numDest == 1) and (numStart == 1):
+        #path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+        #utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+    match numDest:
+        case 1 if numStart == 1:
+            path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+            utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+            utils.textboxDisplayedText='Sucessfully ran the Dijkstra algorithm'
+        case 1 if numStart == 0:
+            utils.textboxDisplayedText='You need to select a starting square to run the Dijkstra algorithm'
+        case 0 if numStart == 1:
+            utils.textboxDisplayedText='You need to select a destination square to run the Dijkstra algorithm'
+        case 0 if numStart == 0:
+            utils.textboxDisplayedText='You need to select a starting square and a destination square to run the Dijkstra algorithm'
 
 
 # def dijkstraRekursive(rect, obstacleColor, destinationColor): # gives back the "path" and a boolean, if it reached the destination. Needs a starting rect

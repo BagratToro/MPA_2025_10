@@ -14,6 +14,8 @@ GREEN = (0, 255, 0)
 DARKGREEN = (0, 100, 0)
 BROWN = (150, 75, 0)
 
+textboxDisplayedText = 'Select a button'
+
 # An Enum (or enumeration) is a special class used to create a set of named constants.
 # Here it represends every neighbour of a rectangle.
 class Neighbour(Enum):
@@ -134,3 +136,5 @@ def reset():
     for rect in UI.rectField.RectField.listOfRects:
         rect.color = WHITE
         rect.objectRect = pygame.draw.rect(rect.screen, rect.color, rect.rect)
+        global textboxDisplayedText
+        textboxDisplayedText='Sucessfully reset the field'

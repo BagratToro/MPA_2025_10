@@ -49,6 +49,7 @@ class Button():
                     self.function()
                 else:
                     self.pressed = False
+                    utils.textboxDisplayedText='Select a button'
 
 
         self.buttonSurface.blit(self.buttonText, [

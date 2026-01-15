@@ -16,9 +16,22 @@ def runAStar():
             numStart += 1
         if rect.color == utils.YELLOW:
             numDest += 1
-    if (numDest == 1) and (numStart == 1):
-        path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
-        utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+    #if (numDest == 1) and (numStart == 1):
+        #path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+        #utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+    #else:
+        #utils.textboxDisplayedText = 'Unable to run the a* Algorithm'
+    match numDest:
+        case 1 if numStart == 1:
+            path = aStarAlgorithm(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
+            utils.drawPath(path, utils.GREEN, utils.DARKGREEN)
+            utils.textboxDisplayedText='Sucessfully ran the A* algorithm'
+        case 1 if numStart == 0:
+            utils.textboxDisplayedText='You need to select a starting square to run the A* algorithm'
+        case 0 if numStart == 1:
+            utils.textboxDisplayedText='You need to select a destination square to run the A* algorithm'
+        case 0 if numStart == 0:
+            utils.textboxDisplayedText='You need to select a starting square and a destination square to run the A* algorithm'
 
 def rectCost(rect, slowColor):
     if rect.color == slowColor:

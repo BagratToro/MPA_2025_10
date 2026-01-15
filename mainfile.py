@@ -39,7 +39,7 @@ Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY =
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
-textbox = UI.textbox.TextBox(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace, font = pygame.font.SysFont('Arial', 24))
+textbox = UI.textbox.TextBox(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace)
 
 
 
@@ -51,6 +51,7 @@ while running:
     mousePos = pygame.mouse.get_pos()
     grid.mousePos = mousePos
     grid.updateMousePos()
+    textbox.drawsurface()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -61,14 +62,19 @@ while running:
         for rect in UI.rectField.RectField.listOfRects:
             if Start.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Start)
+                utils.textboxDisplayedText='Allows you to select a starting square'
             elif Finish.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Finish)
+                utils.textboxDisplayedText='Allows you to select a destination square'
             elif Obstacle.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Obstacle)
+                utils.textboxDisplayedText='Allows you to declare a square as non tresspassable'
             elif Mud.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Mud)
+                utils.textboxDisplayedText='Allows you to declare a square as a worse path'
             elif Delete.getPressed() == True:
                 rect.changeColor(event, mouseInputs, type = utils.RectType.Blank)
+                utils.textboxDisplayedText='Allows you to clear a square'
             #if rect.changeColor(event) != None:
                 #rect.changeColor(event)
                 #clock.tick(5)
