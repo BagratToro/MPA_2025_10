@@ -30,6 +30,7 @@ class Button():
 # Checks if the button has been pressed and if so, executes it's associated function and in case buttonTypeToggle = True, changes self.pressed.
     def check(self, event):
         self.event = event
+        # If the button is not clicked or the mouse is not hovering.
         if self.pressed != True:
             self.buttonSurface.fill(utils.BLUE)
         else:
@@ -49,6 +50,7 @@ class Button():
                     self.pressed = False
                     utils.outputDisplayedText='Select a button'
 
+        # Projecting everything on the buttonSurface.
         self.buttonSurface.blit(self.buttonText, [
             self.buttonRectangle.width/2 - self.buttonText.get_rect().width/2,
             self.buttonRectangle.height/2 - self.buttonText.get_rect().height/2

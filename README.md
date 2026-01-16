@@ -33,7 +33,7 @@ mainfile.py:
 Equal contributions from everyone.
 
 utils.py:
-Bagrat T. did connection(), getStart(), getDest(), getRect()
+Bagrat T. did connection(), getStart(), getDest()
 drawPath() was done by Nils P. and Bagrat T.
 Nils P. did exclusiveStart(), exclusiveFinish(), clearPath(), reset()
 

@@ -6,14 +6,17 @@ import heapq
 def runDijkstra():
     numDest = 0
     numStart = 0
+    # Resetting every button after starting the algorithm.
     for button in utils.listOfButtons:
         button.pressed = False
     utils.clearPath()
+    # Looking for the number of starts and destinations.
     for rect in UI.rectField.RectField.listOfRects:
         if rect.color == utils.BLUE:
             numStart += 1
         if rect.color == utils.YELLOW:
             numDest += 1
+    # Checking for every number of starts and destinations.
     match numDest:
         case 1 if numStart == 1:
             path = dijkstra(utils.getStart(UI.rectField.RectField.listOfRects, utils.BLUE), utils.RED, utils.YELLOW, utils.BROWN)
@@ -30,20 +33,25 @@ def runDijkstra():
         case 0 if numStart == 0:
             utils.outputDisplayedText='You need to select a starting square and \na destination square to run the Dijkstra algorithm'
 
+# Calculating the cost of a rectangle with a normal color and a slow color.
 def rectCost(rect, slowColor):
     if rect.color == slowColor:
         return 5
     return 1
 
+# The actual algorithm.
 def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
     counter = 0
     startRect.cost = 0
+    # Creating the priorityQueue which will sort from the smallest item to the largest item.
     priorityQueue = [(startRect.cost, counter, startRect)]
+    # Creating a list of checked rectangles.
     checkedRect = []
-    destination = utils.getDest(UI.rectField.RectField.listOfRects, utils.YELLOW)
     
     # These dictionaries hold the inforamtions to every rectangle.
-    distance = {startRect: 0}
+    # cost holds the cost for every rect.
+    # previousRect holds the rect, from which the algorithm reached the rect.
+    cost = {startRect: 0}
     previousRect = {startRect: None}
     
     # Goes over every node and takes every time that node, which takes the smallest value. 
@@ -55,9 +63,9 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
         # The while loop should end, whenever it gets to the destination -> *früh stopp* Dijkstra !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if rect.color == destinationColor:
             break
-        # When it costs to much, to get to that node, it should ignore that path.
         
-        if currentCost > distance[rect]:
+        # When it costs more, to get to that node via a another path, the path should be ignored.
+        if currentCost > cost[rect]:
             continue
 
         checkedRect.append(rect)
@@ -70,22 +78,25 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
             if neighbour.color == obstacleColor:
                 continue
 
+            # Calculating the cost for the neighbour.
             neighbour.cost = rectCost(neighbour, slowColor)
             neighbour.cost = currentCost + neighbour.cost
-
-            if (neighbour not in distance) or (neighbour.cost < distance[neighbour]):
-                distance[neighbour] = neighbour.cost
+            
+            # Checking if the neighbour is in the cost or smaller than the value in stored in the cost.
+            if (neighbour not in cost) or (neighbour.cost < cost[neighbour]):
+                cost[neighbour] = neighbour.cost
                 previousRect[neighbour] = rect
                 counter += 1
                 heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
 
+            # Drawing all checked rectangles grey.
             utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
         
-    
+    # This if-Statement is for the case, that the priorityQueue is empty without getting to the destination.
     if len(priorityQueue) == 0:
         return checkedRect, False
     else:
-        rect = utils.getRect(rect.row, rect.column)    
+        # Calculating the path via going back with the previousRect.
         path = []
         while rect != None:
             pathRect = rect

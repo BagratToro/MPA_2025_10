@@ -9,8 +9,10 @@ import sys
 
 pygame.init()
 
-screenUpdate = True
+# Getting the width and height of the monitor.
 monitor = pygame.display.Info()
+
+# Creating all the fields in terms of the outputSpace.
 outputSpace = monitor.current_h / 12
 buttonSpace = 2 * outputSpace
 squareScreenHeight = monitor.current_h - buttonSpace - 2 * outputSpace
@@ -22,11 +24,14 @@ screenHeight = monitor.current_h - outputSpace
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 clock = pygame.time.Clock()
 
+# Getting the coordinates of the mouse.
 mousePos = pygame.mouse.get_pos()
 
+# The grid for rectangles.
 grid = UI.rectField.RectField(screen = screen, numColumns = numColumns, numRows = numRows, rectWidth = squareScreenHeight / numColumns, rectHeight = squareScreenHeight / numRows, 
                               xReset = 0, yReset = 0, color = utils.WHITE, mousePos = mousePos)
 
+# Here are all button objects.
 Start = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Start', function = utils.clearPath)
 Finish = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = True, displayedText = 'Finish', function = utils.clearPath)
 
@@ -39,6 +44,7 @@ Reset = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY =
 AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'AStar', function = aStar.aStar.runAStar)
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
+# This is the output object.
 output = UI.output.Output(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace, screenHeight = monitor.current_h)
 
 
@@ -48,6 +54,7 @@ while running:
     clock.tick(60)
     mouseInputs = pygame.mouse.get_pressed()
 
+    # Updating the mouse position in the while loop.
     mousePos = pygame.mouse.get_pos()
     grid.mousePos = mousePos
     grid.updateMousePos()
@@ -55,8 +62,11 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
         for button in utils.listOfButtons:
             button.check(event)
+
+        # Checking for all buttons whether a button is pressed/clicked.
         for rect in UI.rectField.RectField.listOfRects:
             if Start.getPressed() == True:
                 rect.changeColor(mouseInputs, type = utils.RectType.Start)

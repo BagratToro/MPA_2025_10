@@ -17,7 +17,7 @@ class RectField:
         self.drawField()
 
 
-    # Draws all rectangles and adds them to the "listofRects"as objects. (Zeichnet und fügt der Liste "listOfRects" alle Rechtecke als Objekte zu.)
+    # Draws all rectangles and adds them to the "listofRects"as objects.
     def drawField(self):
         x = RectField.xReset
         y = RectField.yReset
@@ -29,7 +29,7 @@ class RectField:
             x = RectField.xReset
         y = RectField.yReset
 
-
+    # Updating the mousePosition for every rectangle.
     def updateMousePos(self):
         for rect in self.listOfRects:
             rect.mousePos = self.mousePos

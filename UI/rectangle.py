@@ -16,7 +16,7 @@ class Rectangle:
         self.cost = float("inf")
 
 
-    # Changes the color of a rectangle based on the input of the user. (Verändert die Farbe eines Rechtecks anhand von Eingaben des Users.)
+    # Changes the color of a rectangle based on the input of the user.
     def changeColor(self, mouseInputs, type):
         if self.objectRect.collidepoint(self.mousePos):
             if mouseInputs[0]:

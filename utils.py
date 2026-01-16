@@ -29,6 +29,7 @@ class Neighbour(Enum):
     RIGHT = 3
     DOWN = 4
 
+# Here it represents every button type.
 class RectType(Enum):
     Start = 1
     Finish = 2
@@ -64,16 +65,14 @@ def getStart(listOfRects, startColor):
     for rect in listOfRects:
         if rect.color == startColor:
             return rect
-        
+
+# Searches for the destination of the path with the color attribute of the rect.
 def getDest(listOfRects, destColor):
     for rect in listOfRects:
         if rect.color == destColor:
             return rect
 
-def getRect(row, column):
-    index = row * UI.rectField.RectField.numColumns + column
-    return UI.rectField.RectField.listOfRects[index]
-
+# Making the path visable via changing the color attribute.
 def drawPath(path, color, mudColor):
     if path != None:
         for rect in path:
