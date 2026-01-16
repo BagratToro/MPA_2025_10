@@ -59,6 +59,7 @@ while running:
     grid.mousePos = mousePos
     grid.updateMousePos()
     output.refreshText()
+    level = []
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -84,6 +85,13 @@ while running:
                 rect.changeColor(mouseInputs, type = utils.RectType.Blank)
                 utils.outputDisplayedText='Allows you to clear a square'
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_a:
+                print(level)
+        for rect in UI.rectField.RectField.listOfRects:
+            if rect.color == utils.RED:
+                level.append(rect)
+        
     pygame.display.flip()
 pygame.quit()
 sys.exit()

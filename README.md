@@ -3,6 +3,9 @@ Repository for MPA 2025/2026 development
 
 The goal of the project is to program the a* and Dijkstra algorithms with pygame.
 
+IMPORTANT:
+To avoid bugs, use the pygame community edition(pygame-ce).
+
 Algorithm:
 
 aStar.py:

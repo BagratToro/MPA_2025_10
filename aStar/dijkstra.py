@@ -47,12 +47,14 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
     priorityQueue = [(startRect.cost, counter, startRect)]
     # Creating a list of checked rectangles.
     checkedRect = []
+    destination = utils.getDest(UI.rectField.RectField.listOfRects, utils.YELLOW)
     
     # These dictionaries hold the inforamtions to every rectangle.
     # cost holds the cost for every rect.
     # previousRect holds the rect, from which the algorithm reached the rect.
     cost = {startRect: 0}
     previousRect = {startRect: None}
+    previousRect[destination] = None
     
     # Goes over every node and takes every time that node, which takes the smallest value. 
     # That's why the algorythm uses heap and pops always from the beginning.
@@ -93,7 +95,7 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
             utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
         
     # This if-Statement is for the case, that the priorityQueue is empty without getting to the destination.
-    if len(priorityQueue) == 0:
+    if previousRect[destination] == None:
         return checkedRect, False
     else:
         # Calculating the path via going back with the previousRect.
