@@ -13,6 +13,7 @@ class Rectangle:
         self.row = row
         self.column = column
         self.objectRect = pygame.draw.rect(screen, self.color, (leftTopX, leftTopY, width, height))
+        self.realCost = float("inf")
         self.cost = float("inf")
 
 

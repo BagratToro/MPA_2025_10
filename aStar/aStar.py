@@ -35,7 +35,7 @@ def runAStar():
 # Calculating the cost of a rectangle with a normal color and a slow color.
 def rectCost(rect, slowColor):
     if rect.color == slowColor:
-        return 7
+        return 5
     return 1
 
 # This is the heuristik with the manhatten grid.
@@ -47,9 +47,9 @@ def heuristik(rect, destination):
 # The actual algorithm.
 def aStar(startRect, obstacleColor, destinationColor, slowColor):
     counter = 0
-    startRect.cost = 0
+    startRect.realCost = 0
     # Creating the priorityQueue which will sort from the smallest item to the largest item.
-    priorityQueue = [(startRect.cost, 0, counter, startRect)]
+    priorityQueue = [(startRect.realCost, counter, startRect)]
     # Creating a list of checked rectangles.
     checkedRect = []
     destination = utils.getDest(UI.rectField.RectField.listOfRects, utils.YELLOW)
@@ -57,7 +57,7 @@ def aStar(startRect, obstacleColor, destinationColor, slowColor):
     # These dictionaries hold the inforamtions to every rectangle.
     # cost holds the cost for every rect.
     # previousRect holds the rect, from which the algorithm reached the rect.
-    cost = {startRect: 0}
+    realCostList = {startRect: 0}
     previousRect = {startRect: None}
     previousRect[destination] = None
     
@@ -65,14 +65,14 @@ def aStar(startRect, obstacleColor, destinationColor, slowColor):
     # That's why the algorythm uses heap and pops always from the beginning.
     while priorityQueue:
         currentItem = heapq.heappop(priorityQueue)
-        (currentCost, placeHolder1, placeHolder2, rect) = currentItem
+        (placeHolder1, placeHolder2, rect) = currentItem
 
         # The while loop should end, whenever it gets to the destination -> *früh stopp* Dijkstra !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if rect.color == destinationColor:
             break
         
         # When it costs more, to get to that node via a another path, the path should be ignored.
-        if currentCost > cost[rect]:
+        if rect.realCost > realCostList[rect]:
             continue
 
         checkedRect.append(rect)
@@ -87,20 +87,18 @@ def aStar(startRect, obstacleColor, destinationColor, slowColor):
                 continue
 
             # Calculating the cost for the neighbour.
-            rectHeuristik = heuristik(neighbour, destination) * rectCost(neighbour, slowColor)
-            neighbour.cost = 1
-            neighbour.cost += rectHeuristik
-            neighbour.cost += currentCost
+            neighbour.realCost = (rectCost(neighbour, slowColor) + rect.realCost)
 
             # Checking if the neighbour is in the cost or smaller than the value in stored in the cost.
-            if (neighbour not in cost) or (neighbour.cost < cost[neighbour]):
-                cost[neighbour] = neighbour.cost
+            if (neighbour not in realCostList) or (neighbour.realCost < realCostList[neighbour]):
+                neighbour.cost = neighbour.realCost + heuristik(neighbour, destination)
+                realCostList[neighbour] = neighbour.realCost
                 previousRect[neighbour] = rect
                 counter += 1
-                heapq.heappush(priorityQueue, (neighbour.cost, rectHeuristik, counter, neighbour))
+                heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
         
-        # Drawing all checked rectangles grey.
-        utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
+            # Drawing all checked rectangles grey.
+            utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
 
     # This if-Statement is for the case, that the priorityQueue is empty without getting to the destination.
     if previousRect[destination] == None:

@@ -42,9 +42,9 @@ def rectCost(rect, slowColor):
 # The actual algorithm.
 def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
     counter = 0
-    startRect.cost = 0
+    startRect.realCost = 0
     # Creating the priorityQueue which will sort from the smallest item to the largest item.
-    priorityQueue = [(startRect.cost, counter, startRect)]
+    priorityQueue = [(startRect.realCost, counter, startRect)]
     # Creating a list of checked rectangles.
     checkedRect = []
     destination = utils.getDest(UI.rectField.RectField.listOfRects, utils.YELLOW)
@@ -52,11 +52,11 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
     # These dictionaries hold the inforamtions to every rectangle.
     # cost holds the cost for every rect.
     # previousRect holds the rect, from which the algorithm reached the rect.
-    cost = {startRect: 0}
+    realCostList = {startRect: 0}
     previousRect = {startRect: None}
     previousRect[destination] = None
     
-    # Goes over every node and takes every time that node, which takes the smallest value. 
+    # Goes over every node and takes every time that node, which takes the smallest value.
     # That's why the algorythm uses heap and pops always from the beginning.
     while priorityQueue:
         currentItem = heapq.heappop(priorityQueue)
@@ -67,7 +67,7 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
             break
         
         # When it costs more, to get to that node via a another path, the path should be ignored.
-        if currentCost > cost[rect]:
+        if currentCost > realCostList[rect]:
             continue
 
         checkedRect.append(rect)
@@ -81,15 +81,15 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
                 continue
 
             # Calculating the cost for the neighbour.
-            neighbour.cost = rectCost(neighbour, slowColor)
-            neighbour.cost = currentCost + neighbour.cost
+            neighbour.realCost = rectCost(neighbour, slowColor)
+            neighbour.realCost = currentCost + neighbour.realCost
             
             # Checking if the neighbour is in the cost or smaller than the value in stored in the cost.
-            if (neighbour not in cost) or (neighbour.cost < cost[neighbour]):
-                cost[neighbour] = neighbour.cost
+            if (neighbour not in realCostList) or (neighbour.realCost < realCostList[neighbour]):
+                realCostList[neighbour] = neighbour.realCost
                 previousRect[neighbour] = rect
                 counter += 1
-                heapq.heappush(priorityQueue, (neighbour.cost, counter, neighbour))
+                heapq.heappush(priorityQueue, (neighbour.realCost, counter, neighbour))
 
             # Drawing all checked rectangles grey.
             utils.drawPath(checkedRect, utils.GREY, utils.DARKGREY)
