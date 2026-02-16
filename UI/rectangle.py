@@ -36,5 +36,3 @@ class Rectangle:
                         self.color = utils.WHITE
 
         self.objectRect = pygame.draw.rect(self.screen, self.color, self.rect)
-
-

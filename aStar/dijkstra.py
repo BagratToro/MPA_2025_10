@@ -107,4 +107,3 @@ def dijkstra(startRect, obstacleColor, destinationColor, slowColor):
         path.reverse()
 
         return path, True
-

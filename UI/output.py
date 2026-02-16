@@ -4,13 +4,12 @@ pygame.init()
 
 # Class for the Output Textbox.
 class Output:
-    def __init__(self, screen, leftX, topY, width, height, screenHeight):
+    def __init__(self, screen, leftX, topY, width, height):
         self.screen = screen
         self.leftX = leftX
         self.topY = topY
         self.width = width
         self.height = height
-        self.screenHeight = screenHeight
 
         self.OutputSurface = pygame.Surface((self.width, self.height))
         self.OutputRectangle = pygame.Rect(self.leftX, self.topY, self.width, self.height)

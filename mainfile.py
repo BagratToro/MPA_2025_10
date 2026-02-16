@@ -45,7 +45,7 @@ AStar = UI.buttons.Button(screen = screen, leftX = 0, topY = squareScreenHeight 
 Dijkstra = UI.buttons.Button(screen = screen, leftX = squareScreenWidth / 2, topY = squareScreenHeight + buttonSpace / 4 * 3 + outputSpace, width = squareScreenWidth / 2, height = buttonSpace / 4, buttonTypeToggle = False, displayedText = 'Dijkstra', function = aStar.dijkstra.runDijkstra)
 
 # This is the output object.
-output = UI.output.Output(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace, screenHeight = monitor.current_h)
+output = UI.output.Output(screen = screen, leftX = 0, topY = squareScreenHeight, width = screenWidth, height = outputSpace)
 
 
 
